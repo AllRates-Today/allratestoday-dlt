@@ -1,0 +1,6 @@
+.dlt/secrets.toml
+*.duckdb
+*.duckdb.wal
+_storage/
+__pycache__/
+.venv/
