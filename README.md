@@ -12,13 +12,23 @@ Built on dlt's `rest_api` source, so there is no custom client code to maintain.
 |---|---|---|---|
 | `currencies` | `GET /api/v1/symbols` | `currencies` | 150+ supported currencies |
 | `market_rates` | `GET /api/v1/rates?source=&target=` | `$` | Mid-market rate for one pair, refreshed every minute (append) |
-| `central_banks` | `GET /api/v1/central-banks` | `banks` | Catalogue: 118 central banks + 3 tax authorities, home currency, history depth |
+| `central_banks` | `GET /api/v1/central-banks` | `banks` | Catalogue of every official source (118 central banks + tax authorities + composites), home currency, history depth |
 | `official_rates` | `GET /api/v1/central-bank/{bank}/latest` | `rates` | Latest official table per bank (merge on bank + date + pair + type) |
 | `official_rates_by_bank` | `GET /api/v1/central-banks/rates?source=&target=` | `banks` | Every bank's official rate for one pair, with min/max/median |
 
 Dated tables (`/api/v1/central-bank/{bank}/{date}`) and time series
 (`/api/v1/central-bank/{bank}/history?source=&target=&from=&to=`) follow the same
 shape; add them as extra resources when you need backfills.
+
+## Tested output
+
+```
+currencies               160 rows
+central_banks            125 rows
+official_rates           133 rows  (ecb 29, boe 23, rbi 6, cbuae 75 — one row per base/quote/type)
+official_rates_by_bank   111 rows  (USD→EUR across every bank, with min/max/median)
+market_rates               1 row   (appends one mid-market observation per run)
+```
 
 ## Quick start
 
@@ -39,9 +49,9 @@ curl -X POST https://allratestoday.com/api/agent/keys \
 ## Query the data
 
 ```python
-import dlt
-pipeline = dlt.pipeline("allratestoday", destination="duckdb", dataset_name="allratestoday_data")
-print(pipeline.dataset().official_rates.df().head())
+import duckdb
+con = duckdb.connect("allratestoday.duckdb")
+print(con.sql("SELECT bank, rate_date, base, quote, value FROM allratestoday_data.official_rates LIMIT 5"))
 ```
 
 ```sql

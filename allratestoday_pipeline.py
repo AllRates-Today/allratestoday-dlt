@@ -20,6 +20,7 @@ def allratestoday_source(
         "client": {
             "base_url": "https://allratestoday.com/api/",
             "auth": {"type": "bearer", "token": api_key},
+            "paginator": "single_page",
         },
         "resource_defaults": {"write_disposition": "replace"},
         "resources": [
@@ -48,11 +49,10 @@ def allratestoday_source(
                     "table_name": "official_rates",
                     "endpoint": {
                         "path": f"v1/central-bank/{bank}/latest",
-                        "data_selector": "rates",
+                        "data_selector": "$",
                     },
                     "write_disposition": "merge",
                     "primary_key": ["bank", "rate_date", "base", "quote", "type"],
-                    "columns": {"bank": {"data_type": "text"}},
                 }
                 for bank in banks
             ],
@@ -66,10 +66,14 @@ def allratestoday_source(
             },
         ],
     }
+    def flatten_table(page):
+        # one row per (base, quote, type) with the bank and rate_date stamped on
+        for rate in page["rates"]:
+            yield {**rate, "bank": page["bank"], "rate_date": page["rate_date"]}
+
     for resource in rest_api_resources(config):
-        if resource.name.startswith("official_rates_") and resource.name != "official_rates_by_bank":
-            bank = resource.name.removeprefix("official_rates_")
-            resource.add_map(lambda row, b=bank: {**row, "bank": b})
+        if resource.table_name == "official_rates":
+            resource.add_yield_map(flatten_table)
         yield resource
 
 
