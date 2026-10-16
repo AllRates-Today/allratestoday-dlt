@@ -18,7 +18,9 @@ Built on dlt's `rest_api` source, so there is no custom client code to maintain.
 
 Dated tables (`/api/v1/central-bank/{bank}/{date}`) and time series
 (`/api/v1/central-bank/{bank}/history?source=&target=&from=&to=`) follow the same
-shape; add them as extra resources when you need backfills.
+shape; add them as extra resources when you need backfills. They need a
+[paid plan](https://allratestoday.com/pricing): free and trial keys get `403`
+(as does market history, `/api/v1/rates` with `time` or `from`/`to`).
 
 ## Tested output
 
