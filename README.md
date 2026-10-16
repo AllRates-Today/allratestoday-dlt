@@ -63,7 +63,7 @@ ORDER BY rate_date DESC;
 
 ## Keyless alternative
 
-The open endpoints need no key (attribution required, non-commercial):
+The open endpoints need no key and are free to use with visible attribution linking to allratestoday.com (only the downloadable GitHub/Hugging Face/Kaggle dataset is CC BY-NC 4.0, non-commercial):
 `/api/open/central-banks`, `/api/open/central-bank/{bank}` (selector `rates`),
 `/api/open/reference-rate` (selector `rates`), and the Frankfurter / fixer /
 exchangeratesapi compatible shapes under `/api/compat/{provider}/latest`.
