@@ -10,7 +10,7 @@ Built on dlt's `rest_api` source, so there is no custom client code to maintain.
 
 | Table | Endpoint | Data selector | Notes |
 |---|---|---|---|
-| `currencies` | `GET /api/v1/symbols` | `currencies` | 150+ supported currencies |
+| `currencies` | `GET /api/v1/symbols` | `currencies` | 160+ supported currencies |
 | `market_rates` | `GET /api/v1/rates?source=&target=` | `$` | Mid-market rate for one pair, refreshed every minute (append) |
 | `central_banks` | `GET /api/v1/central-banks` | `banks` | Catalogue of every official source (121 central banks + 3 tax authorities + composite), home currency, history depth |
 | `official_rates` | `GET /api/v1/central-bank/{bank}/latest` | `rates` | Latest official table per bank (merge on bank + date + pair + type) |
