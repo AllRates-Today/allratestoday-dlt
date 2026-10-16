@@ -1,7 +1,7 @@
 # AllRatesToday → dlt pipeline
 
 Load live market exchange rates **and official central-bank / tax-authority rates
-(121 sources)** from [AllRatesToday](https://allratestoday.com) into DuckDB,
+(121 central banks + 3 tax authorities)** from [AllRatesToday](https://allratestoday.com) into DuckDB,
 Postgres, BigQuery, Snowflake or any other [dlt](https://dlthub.com) destination.
 
 Built on dlt's `rest_api` source, so there is no custom client code to maintain.
@@ -12,7 +12,7 @@ Built on dlt's `rest_api` source, so there is no custom client code to maintain.
 |---|---|---|---|
 | `currencies` | `GET /api/v1/symbols` | `currencies` | 150+ supported currencies |
 | `market_rates` | `GET /api/v1/rates?source=&target=` | `$` | Mid-market rate for one pair, refreshed every minute (append) |
-| `central_banks` | `GET /api/v1/central-banks` | `banks` | Catalogue of every official source (118 central banks + tax authorities + composites), home currency, history depth |
+| `central_banks` | `GET /api/v1/central-banks` | `banks` | Catalogue of every official source (121 central banks + 3 tax authorities + composite), home currency, history depth |
 | `official_rates` | `GET /api/v1/central-bank/{bank}/latest` | `rates` | Latest official table per bank (merge on bank + date + pair + type) |
 | `official_rates_by_bank` | `GET /api/v1/central-banks/rates?source=&target=` | `banks` | Every bank's official rate for one pair, with min/max/median |
 

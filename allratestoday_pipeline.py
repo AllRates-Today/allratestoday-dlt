@@ -1,5 +1,5 @@
 """dlt pipeline for AllRatesToday — market exchange rates plus official
-central-bank and tax-authority rates (121 sources), loaded into DuckDB.
+central-bank and tax-authority rates (121 central banks + 3 tax authorities), loaded into DuckDB.
 
 Free key: https://allratestoday.com/register (300 requests, no card)
 Self-issued trial key (no account): POST https://allratestoday.com/api/agent/keys
