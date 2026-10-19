@@ -77,5 +77,9 @@ Drop the `auth` block from the client config to use them.
 - OpenAPI: <https://allratestoday.com/openapi.json>
 - Central bank coverage: <https://allratestoday.com/central-bank-rates-api/>
 - MCP server (for AI agents): <https://allratestoday.com/api/mcp>
+- [Register (Free)](https://allratestoday.com/register)
+- [Dashboard](https://allratestoday.com/profile)
+- [Status](https://allratestoday.com/status)
+- [GitHub](https://github.com/AllRates-Today/allratestoday-dlt)
 
 MIT licensed. Rates data is subject to the [AllRatesToday terms](https://allratestoday.com/terms/).
