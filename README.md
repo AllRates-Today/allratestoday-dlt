@@ -40,7 +40,7 @@ cp .dlt/secrets.toml.example .dlt/secrets.toml   # paste your key
 python allratestoday_pipeline.py
 ```
 
-Get a free key at <https://allratestoday.com/register> (300 requests, no card),
+Get a free key at <https://allratestoday.com/register> (free, no card),
 or self-issue a 100-call trial key with no account:
 
 ```bash
